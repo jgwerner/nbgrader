@@ -325,4 +325,6 @@ Submitted assignments
 
     .. autoattribute:: id
 
+    .. autoattribute:: course_label
+
     .. autoattribute:: assignments

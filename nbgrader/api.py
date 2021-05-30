@@ -923,6 +923,7 @@ class Course(Base):
     __tablename__ = "course"
 
     id = Column(String(128), unique=True, primary_key=True, nullable=False)
+    course_label = Column(String(128), nullable=True)
     assignments = relationship("Assignment", back_populates="course")
 
     def __repr__(self):
@@ -1998,6 +1999,7 @@ class Gradebook(object):
             try:
                 self.db.commit()
             except (IntegrityError, FlushError, StatementError) as e:
+                self.db.rollback()
                 raise InvalidEntry(*e.args)
 
         return solution_cell
@@ -2095,6 +2097,7 @@ class Gradebook(object):
             try:
                 self.db.commit()
             except (IntegrityError, FlushError, StatementError) as e:
+                self.db.rollback()
                 raise InvalidEntry(*e.args)
 
         return task_cell
@@ -2192,6 +2195,7 @@ class Gradebook(object):
             try:
                 self.db.commit()
             except (IntegrityError, FlushError, StatementError) as e:
+                self.db.rollback()
                 raise InvalidEntry(*e.args)
 
         return source_cell
