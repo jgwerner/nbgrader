@@ -17,7 +17,7 @@ depends_on = None
 
 
 def upgrade():
-    op.add_column('course', sa.Column('course_label', sa.Float))
+    op.add_column('course', sa.Column('course_label', sa.String))
 
 
 def downgrade():
